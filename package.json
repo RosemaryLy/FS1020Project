@@ -1,0 +1,25 @@
+{
+  "name": "fs1020project",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon --inspect src/index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RosemaryLy/FS1020Project.git"
+  },
+  "author": "Rosemary Ly <rosey.ly@hotmail.com>",
+  "bugs": {
+    "url": "https://github.com/RosemaryLy/FS1020Project/issues"
+  },
+  "homepage": "https://github.com/RosemaryLy/FS1020Project#readme",
+  "dependencies": {
+    "ejs": "^3.0.1",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.1"
+  }
+}
