@@ -25,24 +25,24 @@ async function writeContacts(contactlisting){
 
 app.post('/submitform', function(request,response){
 
-  response.send('Form submitted');
+  response.status(200).send('Form submitted');
 }
 );
 
 app.post ('/CreateUser' , function (request, response) {
 
-  response.send ('User Created');
+  response.status(201).send ('User Created');
 }
 );
 
 app.post('/CreateSession' , function (request,response) {
 
-  response.send ('New Session created!');
+  response.status(200).send ('New Session created!');
 }
 );
 app.get('/ContactListing' , function (request, response) {
   
-  response.send('contacts')
+  response.status(200).send('contacts')
 }
 );
 app.use(function (error, request, response, next) {
