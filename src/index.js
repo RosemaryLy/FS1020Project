@@ -23,19 +23,19 @@ async function writeContacts(contactlisting){
   await writeContacts(filePath, json);
 }
 
-app.post('/submitform', function(request,response){
+app.post('/generalenquiryform', function(request,response){
 
   response.status(200).send('Form submitted');
 }
 );
 
-app.post ('/CreateUser' , function (request, response) {
+app.post ('/User' , function (request, response) {
 
   response.status(201).send ('User Created');
 }
 );
 
-app.post('/CreateSession' , function (request,response) {
+app.post('/Session' , function (request,response) {
 
   response.status(200).send ('New Session created!');
 }
