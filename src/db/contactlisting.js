@@ -35,7 +35,7 @@ let contactlisting=path.resolve('src/db/contactlisting.json');
 async function addItem(newInfo) {
   let addItem=await readContacts();
   addItem.push(newInfo)
-  await write(addItem);
+  await writeFile(addItem);
 }
 
 module.exports = {
