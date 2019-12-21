@@ -23,7 +23,7 @@ let writeFile = util.promisify(fs.writeFile);
 let contactlistingpath = path.resolve('src/db/contactlisting.json'); 
 
 async function readContacts(){
-  let filecontents= await readFile(contactlisting)
+  let filecontents= await readFile(contactlistingpath)
   let allContactInfo = JSON.parse (filecontents)
   return allContactInfo;
 }
