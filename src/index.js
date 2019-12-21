@@ -23,8 +23,9 @@ let writeFile = util.promisify(fs.writeFile);
 let contactlisting = path.resolve('src/db/contactlisting.json'); 
 
 async function readContacts(){
-  let json= await readFile(contactlisting);
-  return JSON.parse(json);
+  let filecontents= await readFile(contactlisting)
+  let allContactInfo = JSON.parse (filecontents)
+  return allContactInfo;
 }
 
 
@@ -34,9 +35,9 @@ async function writeContacts(ContactListing){
 }
 
 async function addItem(newInfo) {
-  let addItem=await readContacts();
-  addItem.push(newInfo)
-  await writeFile(addItem).catch(console.log('Error Caught'));
+  let allContactInfo=await readContacts();
+  allContactInfo.push(newInfo)
+  await writeFile(allContactInfo);
 }
 
 function validateContactInfo(request, response, next) {
@@ -55,18 +56,16 @@ function validateContactInfo(request, response, next) {
 //Route to create an entry when the user submits their form.//
 
 app.post('/generalenquiryform', validateContactInfo,  async function(request,response,next){
-
-  await addItem(request.body);
+await addItem (request.body)
   response.status(201).status('it works!');
   next();
 }
 );
 
 //Route to create or register a user.//
-app.post ('/User' , validateContactInfo, async function (request, response,next) {
-  await addItem(request.body)
+app.post ('/User' , validateContactInfo, async function (request, response) {
+  await contactlisting.addItem(request.body)
   response.sendStatus(201);
-  next();
 }
 );
 

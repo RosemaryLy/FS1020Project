@@ -17,15 +17,16 @@ let contactlisting=path.resolve('src/db/contactlisting.json');
 
  // 
  async function readContacts(){
-    let json= await readFile(contactlisting);
-    return JSON.parse(json)
-  }
+  let filecontents= await readFile(contactlisting)
+  let allContactInfo = JSON.parse (filecontents)
+  return allContactInfo;
+}
 
 
-  async function writeContacts(contactlisting){
-    let json=JSON.stringify(contactlisting, null, 2); 
-    await writeFile(contactlisting, json);
-  }
+async function writeContacts(ContactListing){
+  let json=JSON.stringify(contactlisting, null, 2); 
+  await writeFile(contactlisting, json);
+}
 
 
 
@@ -33,12 +34,12 @@ let contactlisting=path.resolve('src/db/contactlisting.json');
  *
  */
 async function addItem(newInfo) {
-  let addItem=await readContacts();
-  addItem.push(newInfo)
-  await writeFile(addItem);
+  let allContactInfo=await readContacts();
+  allContactInfo.push(newInfo)
+  await writeFile(allContactInfo);
 }
 
 module.exports = {
   read: contactlisting,
-  addItem: addItem,
+  addItem : addItem,
 }
