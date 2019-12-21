@@ -20,22 +20,22 @@ app.use(router); // Apply our router as middleware
 let readFile = util.promisify(fs.readFile);
 let writeFile = util.promisify(fs.writeFile);
 
-let contactlistingpath = path.resolve('src/db/contactlisting.json'); 
+let contactlistingpath = path.resolve('src/db/contactlisting.json');
 
-async function readContacts(){
-  let filecontents= await readFile(contactlistingpath)
-  let allContactInfo = JSON.parse (filecontents)
+async function readContacts() {
+  let filecontents = await readFile(contactlistingpath)
+  let allContactInfo = JSON.parse(filecontents)
   return allContactInfo;
 }
 
 
-async function writeContacts(contactlisting){
-  let json=JSON.stringify(contactlisting, null, 2); 
+async function writeContacts(contactlisting) {
+  let json = JSON.stringify(contactlisting, null, 2);
   await writeFile(contactlistingpath, json);
 }
 
 async function addItem(newInfo) {
-  let allContactInfo=await readContacts();
+  let allContactInfo = await readContacts();
   allContactInfo.push(newInfo)
   await writeContacts(allContactInfo);
 }
@@ -55,23 +55,24 @@ function validateContactInfo(request, response, next) {
 
 //Route to create an entry when the user submits their form.//
 
-app.post('/generalenquiryform', validateContactInfo,  async function(request,response,next){
-await addItem (request.body)
-  response.status(201).status('it works!');
+app.post('/generalenquiryform', validateContactInfo, async function (request, response, next) {
+  await addItem(request.body)
+  response.status(201).send('Form Submitted');
   next();
 }
 );
 
 //Route to create or register a user.//
-app.post ('/User' , validateContactInfo, async function (request, response) {
-  await contactlisting.addItem(request.body)
-  response.sendStatus(201);
+app.post('/User', validateContactInfo, async function (request, response, next) {
+  await addItem(request.body)
+  response.status(201).send('User Profile created')
+  next();
 }
 );
 
 //Route to log a registered user in to create a session.//
 
-app.post('/Session' , validateContactInfo, function(request,response) {
+app.post('/Session', validateContactInfo, function (request, response) {
 
   response.status(200).send('New Session created!');
 }
@@ -90,6 +91,6 @@ app.use(function (error, request, response, next) {
 })
 
 function handleServerListen() {
-    console.log(`Server is listening on port ${port}`);
-  }
-  app.listen(port, handleServerListen);
+  console.log(`Server is listening on port ${port}`);
+}
+app.listen(port, handleServerListen);
