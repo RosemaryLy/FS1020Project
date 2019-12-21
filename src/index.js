@@ -20,7 +20,7 @@ app.use(router); // Apply our router as middleware
 let readFile = util.promisify(fs.readFile);
 let writeFile = util.promisify(fs.writeFile);
 
-let contactlisting = path.resolve('src/db/contactlisting.json'); 
+let contactlistingpath = path.resolve('src/db/contactlisting.json'); 
 
 async function readContacts(){
   let filecontents= await readFile(contactlisting)
@@ -29,15 +29,15 @@ async function readContacts(){
 }
 
 
-async function writeContacts(ContactListing){
+async function writeContacts(contactlisting){
   let json=JSON.stringify(contactlisting, null, 2); 
-  await writeFile(contactlisting, json);
+  await writeFile(contactlistingpath, json);
 }
 
 async function addItem(newInfo) {
   let allContactInfo=await readContacts();
   allContactInfo.push(newInfo)
-  await writeFile(allContactInfo);
+  await writeContacts(allContactInfo);
 }
 
 function validateContactInfo(request, response, next) {
@@ -71,7 +71,7 @@ app.post ('/User' , validateContactInfo, async function (request, response) {
 
 //Route to log a registered user in to create a session.//
 
-app.post('/Session' , function (request,response) {
+app.post('/Session' , validateContactInfo, function(request,response) {
 
   response.status(200).send('New Session created!');
 }

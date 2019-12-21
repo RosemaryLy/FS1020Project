@@ -36,7 +36,7 @@ async function writeContacts(ContactListing){
 async function addItem(newInfo) {
   let allContactInfo=await readContacts();
   allContactInfo.push(newInfo)
-  await writeFile(allContactInfo);
+  await writeContacts(allContactInfo);
 }
 
 module.exports = {
