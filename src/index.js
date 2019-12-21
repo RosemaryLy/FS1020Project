@@ -15,7 +15,7 @@ app.use(express.json()); // Allows us to read JSON sent in `req.body`//
 app.use(router); // Apply our router as middleware
 
 
-
+//Applicable coding for reading and writing to JSON //
 
 let readFile = util.promisify(fs.readFile);
 let writeFile = util.promisify(fs.writeFile);
@@ -40,6 +40,8 @@ async function addItem(newInfo) {
   await writeContacts(allContactInfo);
 }
 
+//Tells User what fields are required... will add templating to make it prettier in next update(next course)//
+
 function validateContactInfo(request, response, next) {
   // If we get an invalid  in `req.body` we want to respond with a 400 status code
   let dbItems = request.body;
@@ -47,6 +49,8 @@ function validateContactInfo(request, response, next) {
     response.status(400).send('"name" is a required field');
   } else if (!dbItems.email) {
     response.status(400).send('"email" is a required field');
+  } else if (!dbItems.phonenumber) {
+    response.status(400).send('"phonenumber" is a required field')
   } else {
     next();
   }
