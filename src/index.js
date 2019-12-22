@@ -19,7 +19,7 @@ app.use(expresslayouts); //EJS middleware//
 app.set('view engine', 'ejs');
 
 //This is so when the data in the form is submitted, it actually gets put in the JSON as an array object. 
-app.use(express.urlencoded({ extended: false })); 
+app.use(express.urlencoded({ extended: false }));
 
 
 //Applicable coding for reading and writing to JSON //
