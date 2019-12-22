@@ -8,14 +8,14 @@ let router = express.Router();
 let util = require('util');
 let path = require('path');
 let fs = require('fs');
-let expressLayouts = require('express-ejs-layouts');
+let expresslayouts = require('express-ejs-layouts');
 
 // Apply middleware//
 app.use(express.json()); // Allows us to read JSON sent in `req.body`//
 
 app.use(router); // Apply our router as middleware
 
-app.use(expressLayouts); //EJS middleware//
+app.use(expresslayouts); //EJS middleware//
 app.set('view engine', 'ejs');
 
 
@@ -69,7 +69,7 @@ app.post('/generalenquiryform', validateContactInfo, async function (request, re
 }
 );
 
-//Route for the login and register landing page//
+//Route for the login and register landing page //
 app.get('/User', function (request, response) {
   response.render('register')
 });
