@@ -17,7 +17,10 @@ app.use(router); // Apply our router as middleware
 
 app.use(expresslayouts); //EJS middleware//
 app.set('view engine', 'ejs');
-app.use(express.urlencoded({ extended: false }));
+
+//This is so when the data in the form is submitted, it actually gets put in the JSON as an array object. 
+app.use(express.urlencoded({ extended: false })); 
+
 
 //Applicable coding for reading and writing to JSON //
 
