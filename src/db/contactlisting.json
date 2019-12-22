@@ -6,24 +6,15 @@
   },
   {
     "name": "John",
-    "email": "ilovemango@mango.net"
+    "email": "ilovemango@mango.net",
+    "phoneNumber": "2345678877"
   },
   {
     "name": "Stacy",
-    "email": "iloveoranges@mango.net"
+    "email": "iloveoranges@mango.net",
+    "phoneNumber":"1010789345"
   },
-  {
-    "name": "Harry",
-    "email": "ilovepineapples@mango.net"
-  },
-  {
-    "name": "Jeff",
-    "email": "testing@drake.com"
-  },
-  {
-    "name": "Jeff",
-    "email": "testing@drake.com"
-  },
+
   {
     "name": "Harry",
     "email": "ilovepineapples@mango.net",

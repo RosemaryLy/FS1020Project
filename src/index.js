@@ -8,11 +8,15 @@ let router = express.Router();
 let util = require('util');
 let path = require('path');
 let fs = require('fs');
+let expressLayouts = require('express-ejs-layouts');
 
 // Apply middleware//
 app.use(express.json()); // Allows us to read JSON sent in `req.body`//
 
 app.use(router); // Apply our router as middleware
+
+app.use(expressLayouts); //EJS middleware//
+app.set('view engine', 'ejs');
 
 
 //Applicable coding for reading and writing to JSON //
@@ -40,7 +44,6 @@ async function addItem(newInfo) {
   await writeContacts(allContactInfo);
 }
 
-//Tells User what fields are required... will add templating to make it prettier in next update(next course)//
 
 function validateContactInfo(request, response, next) {
   // If we get an invalid  in `req.body` we want to respond with a 400 status code
@@ -66,7 +69,12 @@ app.post('/generalenquiryform', validateContactInfo, async function (request, re
 }
 );
 
-//Route to create or register a user.//
+//Route for the login and register landing page//
+app.get('/User', function (request, response) {
+  response.render('register')
+});
+
+//Route to create a user.//
 app.post('/User', validateContactInfo, async function (request, response, next) {
   await addItem(request.body)
   response.status(201).send('User Profile created')
@@ -74,8 +82,12 @@ app.post('/User', validateContactInfo, async function (request, response, next) 
 }
 );
 
-//Route to log a registered user in to create a session.//
 
+//Route for the login and register landing page//
+app.get('/Session', function (request, response) {
+  response.render('login');
+});
+//Route to log a registered user in to create a session.//
 app.post('/Session', validateContactInfo, function (request, response) {
 
   response.status(200).send('New Session created!');
