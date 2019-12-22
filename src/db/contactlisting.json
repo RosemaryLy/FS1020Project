@@ -12,12 +12,23 @@
   {
     "name": "Stacy",
     "email": "iloveoranges@mango.net",
-    "phoneNumber":"1010789345"
+    "phoneNumber": "1010789345"
   },
-
   {
     "name": "Harry",
     "email": "ilovepineapples@mango.net",
     "phonenumber": "447823458800"
+  },
+  {
+    "name": "rose",
+    "email": "hello@hello.com",
+    "password": "hehehe"
+  },
+ 
+  {
+    "name": "tina",
+    "email": "yang@gmail.com",
+    "phonenumber": "1234569990",
+    "generaltext": ""
   }
 ]

@@ -17,7 +17,7 @@ app.use(router); // Apply our router as middleware
 
 app.use(expresslayouts); //EJS middleware//
 app.set('view engine', 'ejs');
-
+app.use(express.urlencoded({ extended: false }));
 
 //Applicable coding for reading and writing to JSON //
 
@@ -59,9 +59,26 @@ function validateContactInfo(request, response, next) {
   }
 }
 
+function validateUserInfo(request, response, next) {
+  // If we get an invalid  in `req.body` we want to respond with a 400 status code
+  let dbItems = request.body;
+  if (!dbItems.name) {
+    response.status(400).send('"name" is a required field');
+  } else if (!dbItems.email) {
+    response.status(400).send('"email" is a required field');
+  } else if (!dbItems.password) {
+    response.status(400).send('"password" is a required field')
+  } else {
+    next();
+  }
+}
+
+//Route for the general enquiry form landing page//
+app.get('/generalenquiryform', function (request, response) {
+  response.render('generalenquiryform');
+});
 
 //Route to create an entry when the user submits their form.//
-
 app.post('/generalenquiryform', validateContactInfo, async function (request, response, next) {
   await addItem(request.body)
   response.status(201).send('Form Submitted');
@@ -75,7 +92,7 @@ app.get('/User', function (request, response) {
 });
 
 //Route to create a user.//
-app.post('/User', validateContactInfo, async function (request, response, next) {
+app.post('/User', validateUserInfo, async function (request, response, next) {
   await addItem(request.body)
   response.status(201).send('User Profile created')
   next();
